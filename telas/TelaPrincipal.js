@@ -4,7 +4,7 @@ import { Text, View } from "react-native"
 const TelaPrincipal =() => {
 return(
  <View>
-    <Text>ola</Text>
+    <Text>sejam bem viados</Text>
  </View>   
 )
 }
