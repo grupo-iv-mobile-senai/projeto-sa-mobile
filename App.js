@@ -8,10 +8,19 @@ import { useEffect } from 'react';
 import TelaCadastro from './telas/TelaCadastro';
 import TelaPrincipal from './telas/TelaPrincipal';
 
-// useEffect(() => {
-//   buscarStorage();
-// }, []);
 
+// useEffect(() => {
+  //   buscarStorage();
+  // }, []);
+  
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      textAlign: 'center'
+    },
+  });
+  
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -27,12 +36,6 @@ export default function App() {
       </NavigationContainer>
     </View>
   );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    textAlign: 'center'
-  },
-});
+
+}
