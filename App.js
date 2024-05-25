@@ -6,7 +6,9 @@ import TELAS from './comum/constantes/telas';
 import TelaLogin from './telas/TelaLogin';
 import { useEffect } from 'react';
 import TelaCadastro from './telas/TelaCadastro';
-import TelaPrincipal from './telas/TelaPrincipal';
+import TelaPrincipal from './telas/TelaPrincipal/TelaPrincipal';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 
 // useEffect(() => {
@@ -20,7 +22,8 @@ import TelaPrincipal from './telas/TelaPrincipal';
       textAlign: 'center'
     },
   });
-  
+
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -29,12 +32,17 @@ export default function App() {
       <StatusBar style='auto' />
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
           <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
           <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
-          <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
         </Stack.Navigator>
       </NavigationContainer>
+      <NavigationContainer>
+      
+      </NavigationContainer>
+      
     </View>
+
   );
 
 
