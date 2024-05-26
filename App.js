@@ -31,10 +31,10 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style='auto' />
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
-          <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
+        <Stack.Navigator screenOptions={{headerShown:false}}>
           <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
+          <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
+          <Stack.Screen  name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
         </Stack.Navigator>
       </NavigationContainer>
       <NavigationContainer>

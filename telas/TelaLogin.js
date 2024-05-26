@@ -3,7 +3,7 @@ import CampoTextoCustomizado from "../comum/componentes/CampoTextoCustomizado/Ca
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado"
 import React, { useEffect, useState } from "react"
 import TELAS from "../comum/constantes/telas"
-import { buscarStorage } from "./TelaCadastro"
+
 
 const estilos = StyleSheet.create({
     tudo: {
@@ -45,9 +45,7 @@ const TelaLogin = (props) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-    useEffect(() => {
-        buscarStorage(setUsuarios);
-    }, []);
+
 
     const entrar = () => {
         if (email.trim() && senha.trim()) {

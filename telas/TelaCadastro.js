@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { KeyboardAvoidingView, ScrollView, StyleSheet, View, Platform } from "react-native";
+import { KeyboardAvoidingView, ScrollView, StyleSheet, View, Platform, TextInput } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CampoTextoCustomizado from "../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado";
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado";
 import TELAS from "../comum/constantes/telas";
+import api from "../comum/servicos/api"
 
 const estilos = StyleSheet.create({
     tudo: {
@@ -21,68 +22,49 @@ const estilos = StyleSheet.create({
 
 const TelaCadastro = (props) => {
 
-
-    const [usuarios, setUsuarios] = useState([]);
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
     const [email, setEmail] = useState('');
-    const [dtNasc, setDtNasc] = useState('');
     const [cpf, setCpf] = useState('');
     const [telefone, setTelefone] = useState('');
 
-    useEffect(() => {
-        buscarStorage();
-    }, []);
-
-    const salvarStorage = async () => {
-        const usuariosAtuais = usuarios.slice()
-        if (nome && senha && email && dtNasc && cpf && telefone) {
-            const novoUsuario = {
-                nome,
-                senha,
-                email,
-                dtNasc,
-                cpf,
-                telefone,
+    const vai = async () => {
+        try{
+            const usuario = {
+                nome_cliente: nome,
+                email_cliente:email,
+                senha_cliente:senha,
+                cpf_cliente:+cpf,
+                telefone_cliente:+telefone,
             };
-            const usuariosAtuais = [...usuarios, novoUsuario]
-            await AsyncStorage.setItem('app1', JSON.stringify(usuariosAtuais))
-            setUsuarios(usuariosAtuais)
-            console.log(usuariosAtuais)
-            props.navigation.navigate(TELAS.TELA_LOGIN)
+            await api.post('/cliente',usuario)
+            alert('Dados salvos com sucesso!');
+           props.navigation.navigate(TELAS.TELA_LOGIN);
+        } catch (error){
+            alert(error.response.data);
         }
-        else {
-            alert('Preencha todos os campos!')
-        }
-    }
+    };
+
 
     return (
-        <KeyboardAvoidingView
-            style={estilos.container}
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
-            <ScrollView style={estilos.tudo}>
+      
+        
+
+                <View>
+        <ScrollView style={estilos.tudo}>
                 <CampoTextoCustomizado style={estilos.input} label='nome' value={nome} onChangeText={setNome} />
                 <CampoTextoCustomizado style={estilos.input} label='email' value={email} onChangeText={setEmail} />
-                <CampoTextoCustomizado style={estilos.input} label='senha' value={senha} onChangeText={setSenha} />
-                <CampoTextoCustomizado style={estilos.input} label='data de nascimento' value={dtNasc} onChangeText={setDtNasc} />
+                <CampoTextoCustomizado style={estilos.input} label='senha' value={senha} onChangeText={setSenha}  secureTextEntry={true} />
                 <CampoTextoCustomizado style={estilos.input} label='cpf' value={cpf} onChangeText={setCpf} />
                 <CampoTextoCustomizado style={estilos.input} label='telefone' value={telefone} onChangeText={setTelefone} />
-                <BotaoCustomizado onPress={salvarStorage}>enviar</BotaoCustomizado>
+                
+
+            <BotaoCustomizado onPress={vai}>enviar</BotaoCustomizado>
             </ScrollView>
-        </KeyboardAvoidingView>
+            </View>
+       
     );
 };
 
 export default TelaCadastro;
 
-export async function buscarStorage(setUsuarios) {
-    try {
-        const response = await AsyncStorage.getItem('app1');
-        if (response) {
-            setUsuarios(JSON.parse(response));
-        }
-    } catch (error) {
-        console.error('Erro ao buscar dados do AsyncStorage:', error);
-    }
-}
