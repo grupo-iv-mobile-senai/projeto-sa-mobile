@@ -6,6 +6,7 @@ const CORES = {
     TEXTO_ESCURO: 'black',
     TEXTO_CLARO: 'white',
     FUNDO_PADRAO: '#f7f7f7',
+    FUNDO_CARD:'#D8DCE8'
 }
 
 export default CORES
