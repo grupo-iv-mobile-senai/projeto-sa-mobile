@@ -37,7 +37,7 @@ const TelaCadastro = (props) => {
                 cpf_cliente:+cpf,
                 telefone_cliente:+telefone,
             };
-            await api.post('/cliente',usuario)
+            await api.post('/cliente', usuario)
             alert('Dados salvos com sucesso!');
            props.navigation.navigate(TELAS.TELA_LOGIN);
         } catch (error){
