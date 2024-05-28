@@ -3,6 +3,7 @@ import CampoTextoCustomizado from "../comum/componentes/CampoTextoCustomizado/Ca
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado"
 import React, { useEffect, useState } from "react"
 import TELAS from "../comum/constantes/telas"
+import api from "../comum/servicos/api"
 
 
 const estilos = StyleSheet.create({
@@ -41,22 +42,19 @@ const estilos = StyleSheet.create({
 })
 
 const TelaLogin = (props) => {
-    const [usuarios, setUsuarios] = useState([]);
+    const [clientes, setCliente] = useState([])
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-
-
     const entrar = () => {
         if (email.trim() && senha.trim()) {
-            const usuarioEncontrado = usuarios.find(usuario => usuario.email === email && usuario.senha === senha);
-            if (usuarioEncontrado) {
-                props.navigation.navigate(TELAS.TELA_PRINCIPAL);
-            } else {
-                alert('email ou senha incorretos');
+            const clienteEncontrado = clientes.find(cliente => cliente.email_cliente === email && cliente.senha_cliente === senha)
+            if (clienteEncontrado) {
+                props.navigation.navigate(TELAS.TELA_PRINCIPAL)
             }
-        } else {
-            alert('Preencha os dados corretamente');
+            else {
+                alert('Email ou senha incorretos')
+            }
         }
     };
 
