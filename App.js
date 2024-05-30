@@ -7,8 +7,11 @@ import TelaLogin from './telas/TelaLogin';
 import { useEffect, useState } from 'react';
 import TelaCadastro from './telas/TelaCadastro';
 import TelaPrincipal from './telas/TelaPrincipal/TelaPrincipal';
+<<<<<<< HEAD
 import { pegarItemStorage } from './comum/servicos/servicosStorage';
 import { CHAVES_SOTORAGE } from './comum/constantes/ChavesStorage';
+=======
+>>>>>>> b08ad511e9d9c96b644a838c0fda692ee25f67bf
 
 
 
@@ -49,6 +52,10 @@ export default function App() {
           <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
           <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
           <Stack.Screen  name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
+<<<<<<< HEAD
+=======
+
+>>>>>>> b08ad511e9d9c96b644a838c0fda692ee25f67bf
         </Stack.Navigator>
       </NavigationContainer>
       <NavigationContainer>

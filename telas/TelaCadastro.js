@@ -29,40 +29,38 @@ const TelaCadastro = (props) => {
     const [telefone, setTelefone] = useState('');
 
     const vai = async () => {
-        try{
+        try {
             const usuario = {
                 nome_cliente: nome,
-                email_cliente:email,
-                senha_cliente:senha,
-                cpf_cliente:+cpf,
-                telefone_cliente:+telefone,
+                email_cliente: email,
+                senha_cliente: senha,
+                cpf_cliente: +cpf,
+                telefone_cliente: +telefone,
             };
             await api.post('/cliente', usuario)
             alert('Dados salvos com sucesso!');
-           props.navigation.navigate(TELAS.TELA_LOGIN);
-        } catch (error){
+            props.navigation.navigate(TELAS.TELA_LOGIN);
+            console.log(usuario)
+        } catch (error) {
             alert(error.response.data);
         }
     };
 
 
     return (
-      
-        
-
-                <View>
-        <ScrollView style={estilos.tudo}>
+        <View>
+            <ScrollView style={estilos.tudo}>
                 <CampoTextoCustomizado style={estilos.input} label='nome' value={nome} onChangeText={setNome} />
                 <CampoTextoCustomizado style={estilos.input} label='email' value={email} onChangeText={setEmail} />
-                <CampoTextoCustomizado style={estilos.input} label='senha' value={senha} onChangeText={setSenha}  secureTextEntry={true} />
+                <CampoTextoCustomizado style={estilos.input} label='senha' value={senha} onChangeText={setSenha} secureTextEntry={true} />
                 <CampoTextoCustomizado style={estilos.input} label='cpf' value={cpf} onChangeText={setCpf} />
                 <CampoTextoCustomizado style={estilos.input} label='telefone' value={telefone} onChangeText={setTelefone} />
-                
 
-            <BotaoCustomizado onPress={vai}>enviar</BotaoCustomizado>
+
+                <BotaoCustomizado onPress={vai}>enviar</BotaoCustomizado>
             </ScrollView>
-            </View>
-       
+        </View>
+
     );
 };
 
