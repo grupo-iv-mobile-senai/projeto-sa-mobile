@@ -9,48 +9,36 @@ import TelaLogin from "../TelaLogin";
 
 const estilos = StyleSheet.create({
 
-container:{
-   flex:1,
-   alignItems:'center'
-},
-botaoAlugar:{
-   height: 40,
-   borderRadius: 8,
-   alignItems: 'center',
-   justifyContent: 'center',
-backgroundColor:cores.FUNDO_MAIS_ESCURO,
-},
-botaoAnunciar:{
-   height: 40,
-   borderRadius: 8,
-   alignItems: 'center',
-   justifyContent: 'center',
-   backgroundColor:cores.FUNDO_MAIS_ESCURO,
-}
+   container: {
+      flex: 1,
+      alignItems: 'center',
+      marginTop: 30,
+   },
+   botaoAnunciar: {
+      height: 60,
+      borderRadius: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: cores.FUNDO_MAIS_ESCURO,
+   }
 
 });
 
-const TelaPrincipal =() => {
+const TelaPrincipal = (props) => {
 
 
-return(
-   
-   
-   <View style={estilos.container}>
-
-   
- <View>
-   <BotaoCustomizado style={estilos.botaoAlugar}>alugar vaga</BotaoCustomizado>
-    </View>   
-   <View>
-      <BotaoCustomizado style ={estilos.botaoAnunciar}>anunciar vaga</BotaoCustomizado>
-   </View>
-      <CardVagas/>
-      <CardVagas/>
+   return (
 
 
-   </View>
-  
-)
+      <View style={estilos.container}>
+         <BotaoCustomizado
+            style={estilos.botaoAnunciar}
+            onPress={() => props.navigation.navigate(TELAS.TELA_ANUNCIO)}
+         >anunciar vaga</BotaoCustomizado>
+         <CardVagas />
+         <CardVagas />
+      </View>
+
+   )
 }
 export default TelaPrincipal

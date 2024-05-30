@@ -4,7 +4,7 @@ import { Text, View } from "react-native"
 const TelaAluguelVaga = ()=>{
     return(
         <View>
-            <Text>tela aluguel vaga</Text>
+            <Text>nao faraz nada</Text>
         </View>
     )
 }

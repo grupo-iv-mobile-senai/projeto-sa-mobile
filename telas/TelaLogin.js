@@ -13,6 +13,7 @@ const estilos = StyleSheet.create({
   tudo: {
     flex: 1,
     alignItems: "center",
+    marginTop: 30,
   },
   icone: {
     alignItems: "center",
@@ -20,7 +21,7 @@ const estilos = StyleSheet.create({
   input: {
     padding: 10,
     width: 300,
-    border: "2px solid black",
+    borderWidth: 2,
     margin: 15,
     fontSize: 20,
   },

@@ -7,32 +7,30 @@ import TelaLogin from './telas/TelaLogin';
 import { useEffect, useState } from 'react';
 import TelaCadastro from './telas/TelaCadastro';
 import TelaPrincipal from './telas/TelaPrincipal/TelaPrincipal';
-<<<<<<< HEAD
 import { pegarItemStorage } from './comum/servicos/servicosStorage';
 import { CHAVES_SOTORAGE } from './comum/constantes/ChavesStorage';
-=======
->>>>>>> b08ad511e9d9c96b644a838c0fda692ee25f67bf
+import TelaAnuncioVaga from './telas/TelaAnuncioVaga';
 
 
 
 // useEffect(() => {
-  //   buscarStorage();
-  // }, []);
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      textAlign: 'center'
-    },
-  });
+//   buscarStorage();
+// }, []);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    textAlign: 'center'
+  },
+});
 
 
 const Stack = createStackNavigator();
 
 export default function App() {
 
-  const [usuariologado,setUsuariologado]= useState ();
+  const [usuariologado, setUsuariologado] = useState();
   useEffect(() => {
     const verificarUsuarioLogado = async () => {
       const usuarioNoStorage = await pegarItemStorage(CHAVES_SOTORAGE.USUARIO_LOGADO)
@@ -40,28 +38,23 @@ export default function App() {
     }
     verificarUsuarioLogado();
 
-  },[]);
-  if(usuariologado === undefined){
-    return<></>
+  }, []);
+  if (usuariologado === undefined) {
+    return <></>
   }
   return (
     <View style={styles.container}>
       <StatusBar style='auto' />
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown:false}}>
+        <Stack.Navigator >
+          <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
           <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
           <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
-          <Stack.Screen  name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
-<<<<<<< HEAD
-=======
+          <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
 
->>>>>>> b08ad511e9d9c96b644a838c0fda692ee25f67bf
         </Stack.Navigator>
       </NavigationContainer>
-      <NavigationContainer>
-      
-      </NavigationContainer>
-      
+
     </View>
 
   );

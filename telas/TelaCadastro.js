@@ -5,18 +5,25 @@ import CampoTextoCustomizado from "../comum/componentes/CampoTextoCustomizado/Ca
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado";
 import TELAS from "../comum/constantes/telas";
 import api from "../comum/servicos/api"
+import CORES from "../comum/constantes/cores";
 
 const estilos = StyleSheet.create({
     tudo: {
         flex: 1,
-        padding: 20,
+        alignItems: 'center',
+        marginTop: 30,
     },
     input: {
         padding: 10,
         width: 300,
-        border: '2px solid black',
+        borderWidth: 2,
         margin: 15,
         fontSize: 20,
+    },
+    botao: {
+        alignItems: 'center',
+        backgroundColor: CORES.FUNDO_ESCURO,
+        borderRadius: 30,
     },
 })
 
@@ -48,18 +55,15 @@ const TelaCadastro = (props) => {
 
 
     return (
-        <View>
-            <ScrollView style={estilos.tudo}>
+            <View style={estilos.tudo}>
                 <CampoTextoCustomizado style={estilos.input} label='nome' value={nome} onChangeText={setNome} />
                 <CampoTextoCustomizado style={estilos.input} label='email' value={email} onChangeText={setEmail} />
                 <CampoTextoCustomizado style={estilos.input} label='senha' value={senha} onChangeText={setSenha} secureTextEntry={true} />
                 <CampoTextoCustomizado style={estilos.input} label='cpf' value={cpf} onChangeText={setCpf} />
                 <CampoTextoCustomizado style={estilos.input} label='telefone' value={telefone} onChangeText={setTelefone} />
 
-
-                <BotaoCustomizado onPress={vai}>enviar</BotaoCustomizado>
-            </ScrollView>
-        </View>
+                <BotaoCustomizado style={estilos.botao} onPress={vai}>enviar</BotaoCustomizado>
+            </View>
 
     );
 };
