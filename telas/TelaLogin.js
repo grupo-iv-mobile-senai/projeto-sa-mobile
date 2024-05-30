@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { StyleSheet, View } from "react-native";
 import CampoTextoCustomizado from "../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado";
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado";
@@ -7,15 +7,7 @@ import TELAS from "../comum/constantes/telas";
 import { CHAVES_SOTORAGE } from "../comum/constantes/ChavesStorage";
 import api from "../comum/servicos/api";
 import { atualizarItemStorage } from "../comum/servicos/servicosStorage";
-=======
-import { StyleSheet, View } from "react-native"
-import CampoTextoCustomizado from "../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado"
-import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado"
-import React, { useEffect, useState } from "react"
-import TELAS from "../comum/constantes/telas"
-import api from "../comum/servicos/api"
 
->>>>>>> b08ad511e9d9c96b644a838c0fda692ee25f67bf
 
 const estilos = StyleSheet.create({
   tudo: {
@@ -52,7 +44,6 @@ const estilos = StyleSheet.create({
 });
 
 const TelaLogin = (props) => {
-<<<<<<< HEAD
   const [campoEmail, setEmail] = useState('');
   const [campoSenha, setSenha] = useState('');
 
@@ -97,31 +88,7 @@ const TelaLogin = (props) => {
       </BotaoCustomizado>
     </View>
   );
-=======
-    const [clientes, setCliente] = useState([])
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
 
-    const entrar = () => {
-        if (email.trim() && senha.trim()) {
-            const clienteEncontrado = clientes.find(cliente => cliente.email_cliente === email && cliente.senha_cliente === senha)
-            if (clienteEncontrado) {
-                props.navigation.navigate(TELAS.TELA_PRINCIPAL)
-            }
-            else {
-                alert('Email ou senha incorretos')
-            }
-        }
-    };
-
-    return (
-        <View style={estilos.tudo}>
-            <CampoTextoCustomizado style={estilos.input} label='Email' value={email} onChangeText={setEmail} />
-            <CampoTextoCustomizado style={estilos.input} label='Senha' value={senha} onChangeText={setSenha} secureTextEntry />
-            <BotaoCustomizado style={estilos.botao} onPress={entrar}>Entrar</BotaoCustomizado>
-        </View>
-    );
->>>>>>> b08ad511e9d9c96b644a838c0fda692ee25f67bf
 };
 
 export default TelaLogin;
