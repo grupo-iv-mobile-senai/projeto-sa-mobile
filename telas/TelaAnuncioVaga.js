@@ -73,7 +73,7 @@ const TelaAnuncioVaga = (props) => {
             <CampoTextoCustomizado style={estilos.input} label='cidade' value={cidade} onChangeText={setCidade} />
             <CampoTextoCustomizado style={estilos.input} label='estado' value={estado} onChangeText={setEstado} />
 
-            <BotaoCustomizado style={estilos.botao}>cadastrar vaga</BotaoCustomizado>
+            <BotaoCustomizado onPress={cadastrarVaga} style={estilos.botao}>cadastrar vaga</BotaoCustomizado>
         </View>
     )
 }

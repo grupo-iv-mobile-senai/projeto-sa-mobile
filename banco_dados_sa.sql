@@ -1,5 +1,4 @@
 CREATE DATABASE estacionamento_sa;
-
 USE estacionamento_sa;
 
 CREATE TABLE cliente (
@@ -18,6 +17,7 @@ CREATE TABLE locador (
     telefone_locador BIGINT(11),
     email_locador VARCHAR(45)
 );
+
 
 CREATE TABLE categoria_vaga (
     id_categoria INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
