@@ -1,5 +1,5 @@
 
-import { StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import CampoTextoCustomizado from "../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado";
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado";
 import React, { useEffect, useState } from "react";
@@ -7,6 +7,9 @@ import TELAS from "../comum/constantes/telas";
 import { CHAVES_SOTORAGE } from "../comum/constantes/ChavesStorage";
 import api from "../comum/servicos/api";
 import { atualizarItemStorage } from "../comum/servicos/servicosStorage";
+import ListagemVazia from "../comum/componentes/ListagemVazia";
+import SeparadorLista from "../comum/componentes/SeparadorLista";
+import ItemLista from "../comum/componentes/ItemLista";
 
 
 const estilos = StyleSheet.create({
@@ -45,6 +48,7 @@ const estilos = StyleSheet.create({
 });
 
 const TelaLogin = (props) => {
+  const [clientes, setClientes] = useState([])
   const [campoEmail, setEmail] = useState('');
   const [campoSenha, setSenha] = useState('');
 
@@ -53,8 +57,8 @@ const TelaLogin = (props) => {
       const response = await api.post("/logar", {
         email_cliente: campoEmail,
         senha_cliente: campoSenha
-    });
-      
+      });
+
       await atualizarItemStorage(CHAVES_SOTORAGE.USUARIO_LOGADO, response.data);
       props.navigation.navigate(TELAS.TELA_PRINCIPAL);
 
@@ -63,9 +67,17 @@ const TelaLogin = (props) => {
     }
   };
 
+  useEffect(() => {
+    const buscarUsuario = async () => {
+      const res = await api.get('/cliente')
+      setClientes(res.data)
+    }
+    buscarUsuario()
+  }, [])
+
   return (
     <View style={estilos.tudo}>
-      <CampoTextoCustomizado
+      {/* <CampoTextoCustomizado
         style={estilos.input}
         label="Email"
         value={campoEmail}
@@ -81,12 +93,21 @@ const TelaLogin = (props) => {
       <BotaoCustomizado style={estilos.botao} onPress={entrar}>
         Entrar
       </BotaoCustomizado>
-      <BotaoCustomizado style={estilos.botao} onPress={()=>{
-          props.navigation.navigate(TELAS.TELA_CADASTRO)
+      
+      <BotaoCustomizado style={estilos.botao} onPress={() => {
+        props.navigation.navigate(TELAS.TELA_CADASTRO)
       }}
       >
         novo cadastro
-      </BotaoCustomizado>
+      </BotaoCustomizado> */}
+
+      <FlatList
+        data={clientes}
+        renderItem={ItemLista}
+        ListEmptyComponent={ListagemVazia}
+        keyExtractor={(item) => item.id_cliente}
+        ItemSeparatorComponent={SeparadorLista}
+      />
     </View>
   );
 

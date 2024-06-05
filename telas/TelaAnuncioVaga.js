@@ -4,6 +4,7 @@ import { useState } from "react"
 import TELAS from "../comum/constantes/telas"
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado"
 import CORES from "../comum/constantes/cores"
+import api from "../comum/servicos/api"
 
 
 const TelaAnuncioVaga = (props) => {
@@ -50,9 +51,10 @@ const TelaAnuncioVaga = (props) => {
                 logradouro: logradouro,
                 bairro: bairro,
                 cidade: cidade,
-                estado: estado
+                estado: estado,
             }
-            await api.post('http://localhost/cadastro_vaga', vaga)
+            console.log(vaga)
+            await api.post('/adicionar_vaga', vaga)
             alert('vaga salva ')
             props.navigation.navigate(TELAS.TELA_PRINCIPAL)
         }
@@ -60,6 +62,7 @@ const TelaAnuncioVaga = (props) => {
             alert(error.response.data)
         }
     }
+
 
     return (
         <View style={estilos.tudo}>

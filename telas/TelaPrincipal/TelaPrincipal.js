@@ -1,10 +1,14 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native"
 import BotaoCustomizado from "../../comum/componentes/BotaoCustomizado/BotaoCustomizado";
 import cores from "../../comum/constantes/cores"
 import TELAS from "../../comum/constantes/telas";
 import CardVagas from "../../comum/componentes/CardVagas/CardVaga";
 import TelaLogin from "../TelaLogin";
+import ItemLista from "../../comum/componentes/ItemLista";
+import ListagemVazia from "../../comum/componentes/ListagemVazia";
+import SeparadorLista from "../../comum/componentes/SeparadorLista";
+import api from "../../comum/servicos/api";
 
 
 const estilos = StyleSheet.create({
@@ -25,6 +29,15 @@ const estilos = StyleSheet.create({
 });
 
 const TelaPrincipal = (props) => {
+   const [vagas, setVagas] = useState([])
+
+   useEffect(() => {
+      const buscarVaga = async () => {
+         const res = await api.get('/listar_vagas')
+         setVagas(res.data)
+      }
+      buscarVaga()
+   }, [])
 
 
    return (
@@ -35,8 +48,14 @@ const TelaPrincipal = (props) => {
             style={estilos.botaoAnunciar}
             onPress={() => props.navigation.navigate(TELAS.TELA_ANUNCIO)}
          >anunciar vaga</BotaoCustomizado>
-         <CardVagas />
-         <CardVagas />
+         <BotaoCustomizado onPress={() => props.navigation.navigate(TELAS.TELA_PERFIL)}>meu perfil</BotaoCustomizado>
+         <FlatList
+            data={vagas}
+            renderItem={ItemLista}
+            ListEmptyComponent={ListagemVazia}
+            keyExtractor={(item) => item.id_vaga}
+            ItemSeparatorComponent={SeparadorLista}
+         />
       </View>
 
    )
