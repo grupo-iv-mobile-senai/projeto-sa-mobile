@@ -46,8 +46,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style='auto' />
-      <NavigationContainer>
-        <Stack.Navigator >
+      <NavigationContainer >
+        <Stack.Navigator screenOptions={{ cardStyle: { flex: 1 } }}>
           <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
           <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
           <Stack.Screen name={TELAS.TELA_PERFIL} component={TelaPerfil} />
