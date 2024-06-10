@@ -11,7 +11,7 @@ import { pegarItemStorage } from './comum/servicos/servicosStorage';
 import { CHAVES_SOTORAGE } from './comum/constantes/ChavesStorage';
 import TelaAnuncioVaga from './telas/TelaAnuncioVaga';
 import TelaPerfil from './telas/TelaPerfil';
-
+import { NativeBaseProvider } from 'native-base'
 
 
 // useEffect(() => {
@@ -44,21 +44,21 @@ export default function App() {
     return <></>
   }
   return (
-    <View style={styles.container}>
-      <StatusBar style='auto' />
-      <NavigationContainer >
-        <Stack.Navigator screenOptions={{ cardStyle: { flex: 1 } }}>
-          <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
-          <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
-          <Stack.Screen name={TELAS.TELA_PERFIL} component={TelaPerfil} />
-          <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
-          <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
-        </Stack.Navigator>
-      </NavigationContainer>
-
-    </View>
+    <NativeBaseProvider>
+      <View style={styles.container}>
+        <StatusBar style='auto' />
+        <NavigationContainer >
+          <Stack.Navigator screenOptions={{ cardStyle: { flex: 1 } }}>
+            <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
+            <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
+            <Stack.Screen name={TELAS.TELA_PERFIL} component={TelaPerfil} />
+            <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
+            <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </View>
+    </NativeBaseProvider>
 
   );
-
 
 }

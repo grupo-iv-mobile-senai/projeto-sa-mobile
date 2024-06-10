@@ -6,9 +6,13 @@ import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomi
 import CORES from "../comum/constantes/cores"
 import api from "../comum/servicos/api"
 import RNPickerSelect from 'react-native-picker-select';
+import { useToast } from 'native-base';
+import { Select } from 'native-base'
+
 
 
 const TelaAnuncioVaga = (props) => {
+    const toast = useToast()
 
     const pickerSelectStyles = StyleSheet.create({
         inputIOS: {
@@ -43,7 +47,8 @@ const TelaAnuncioVaga = (props) => {
             width: 330,
             margin: 5,
             fontSize: 22,
-            borderWidth: 2
+            borderWidth: 2,
+            borderRadius: 10
         },
         texto: {
             fontSize: 24,
@@ -59,7 +64,11 @@ const TelaAnuncioVaga = (props) => {
             width: 330,
             margin: 5,
             fontSize: 22,
-        }
+        },
+        select: {
+            fontSize: 18,
+            borderWidth: 2,
+        },
 
     })
 
@@ -86,15 +95,21 @@ const TelaAnuncioVaga = (props) => {
             }
             console.log(vaga)
             await api.post('/adicionar_vaga', vaga)
-            alert('vaga salva ')
+            toast.show({
+                description: 'vaga salva',
+                placement: 'top',
+            })
             props.navigation.navigate(TELAS.TELA_PRINCIPAL, { refresh: +new Date() })
         }
         catch (error) {
-            alert(error.response.data)
+            toast.show({
+                description: error.response.data,
+                placement: 'top',
+            })
         }
     }
 
-    
+
 
     return (
         <ScrollView style={estilos.tudo}>
@@ -105,16 +120,15 @@ const TelaAnuncioVaga = (props) => {
                 <CampoTextoCustomizado style={estilos.input} label='capacidade' value={capacidade} onChangeText={setCapacidade} />
                 <CampoTextoCustomizado style={estilos.input} label='valor' value={valor} onChangeText={setValor} />
                 <View style={estilos.viewSelect}>
-                    <RNPickerSelect style={pickerSelectStyles}
-                        onValueChange={setVeiculo}
-                        value={veiculo}
-                        items={[
-                            { label: 'moto', value: 'moto' },
-                            { label: 'carro', value: 'carro' },
-                            { label: 'van', value: 'van' },
-                            { label: 'caminhão', value: 'caminhao' },
-                        ]}
-                        placeholder={{ label: 'selecione uma operação', value: null }} />
+                    <Select style={estilos.select}
+                        selectedValue={veiculo}
+                        placeholder="selecione o veiculo"
+                        onValueChange={itemValue => setVeiculo(itemValue)}>
+                        <Select.Item label="moto" value="moto" />
+                        <Select.Item label="carro" value="carro" />
+                        <Select.Item label="van" value="van" />
+                        <Select.Item label="caminhão" value="caminhao" />
+                    </Select>
                 </View>
                 <Text style={estilos.texto}>Endereço</Text>
                 <CampoTextoCustomizado style={estilos.input} label='logradouro' value={logradouro} onChangeText={setLogradouro} />
