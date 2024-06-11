@@ -77,7 +77,7 @@ const TelaLogin = (props) => {
 
   return (
     <View style={estilos.tudo}>
-      {/* <CampoTextoCustomizado
+      <CampoTextoCustomizado
         style={estilos.input}
         label="Email"
         value={campoEmail}
@@ -99,15 +99,9 @@ const TelaLogin = (props) => {
       }}
       >
         novo cadastro
-      </BotaoCustomizado> */}
+      </BotaoCustomizado>
 
-      <FlatList
-        data={clientes}
-        renderItem={ItemLista}
-        ListEmptyComponent={ListagemVazia}
-        keyExtractor={(item) => item.id_cliente}
-        ItemSeparatorComponent={SeparadorLista}
-      />
+ 
     </View>
   );
 
