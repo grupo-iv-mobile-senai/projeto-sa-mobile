@@ -13,6 +13,7 @@ import TelaAnuncioVaga from './telas/TelaAnuncioVaga';
 import TelaPerfil from './telas/TelaPerfil';
 import { NativeBaseProvider } from 'native-base'
 import TelaEditarPerfil from './telas/TelaEditarPerfil/TelaEditarPerfil';
+import TelaDetalhesVaga from './telas/TelaDetalhesVaga';
 
 
 // useEffect(() => {
@@ -51,11 +52,13 @@ export default function App() {
         <NavigationContainer >
           <Stack.Navigator screenOptions={{ cardStyle: { flex: 1 } }}>
             <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
+            <Stack.Screen name={TELAS.TELA_DETALHES_VAGA} component={TelaDetalhesVaga} />
             <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
             <Stack.Screen name={TELAS.TELA_PERFIL} component={TelaPerfil} />
             <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
             <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
-            <Stack.Screen name={TELAS.TELA_EDITAR_PERFIL} component={TelaEditarPerfil}/>
+            <Stack.Screen name={TELAS.TELA_EDITAR_PERFIL} component={TelaEditarPerfil} />
+
           </Stack.Navigator>
         </NavigationContainer>
       </View>

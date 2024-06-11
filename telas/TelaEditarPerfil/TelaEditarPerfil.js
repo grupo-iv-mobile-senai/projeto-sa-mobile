@@ -15,21 +15,21 @@ import CORES from '../../comum/constantes/cores';
 
 const estilos = StyleSheet.create({
   tudo: {
-      flex: 1,
-      alignItems: 'center',
-      marginTop: 30,
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 30,
   },
   input: {
-      padding: 10,
-      width: 300,
-      borderWidth: 2,
-      margin: 15,
-      fontSize: 20,
+    padding: 10,
+    width: 300,
+    borderWidth: 2,
+    margin: 15,
+    fontSize: 20,
   },
   botao: {
-      alignItems: 'center',
-      backgroundColor: CORES.FUNDO_ESCURO,
-      borderRadius: 30,
+    alignItems: 'center',
+    backgroundColor: CORES.FUNDO_ESCURO,
+    borderRadius: 30,
   },
 })
 
@@ -86,24 +86,24 @@ const TelaEditarPerfil = (props) => {
   };
 
   const excluir = async () => {
-    try {
-     
-        [
-          { text: 'Cancelar', style: 'cancel' },
-          {
-            text: 'Confirmar',
-            onPress: async () => {
-              await api.delete(`/cliente/${idCliente}`);
-              Alert.alert('Sucesso', 'Usuário excluído com sucesso!');
-              props.navigation.navigate(TELAS.TELA_PRINCIPAL, { refresh: +new Date() });
-            },
-          },
-        ],
-      );
-    } catch (error) {
-      Alert.alert('Erro', error.response.data);
-    }
-  };
+    //   try {
+
+    //       [
+    //         { text: 'Cancelar', style: 'cancel' },
+    //         {
+    //           text: 'Confirmar',
+    //           onPress: async () => {
+    //             await api.delete(`/cliente/${idCliente}`);
+    //             Alert.alert('Sucesso', 'Usuário excluído com sucesso!');
+    //             props.navigation.navigate(TELAS.TELA_PRINCIPAL, { refresh: +new Date() });
+    //           },
+    //         },
+    //       ],
+    //     );
+    //   } catch (error) {
+    //     Alert.alert('Erro', error.response.data);
+    //   }
+  }
 
   return (
     <View style={{ padding: 16, gap: 16 }}>

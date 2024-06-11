@@ -6,6 +6,7 @@ import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomi
 import TELAS from "../comum/constantes/telas";
 import api from "../comum/servicos/api"
 import CORES from "../comum/constantes/cores";
+import { useToast } from "native-base";
 
 const estilos = StyleSheet.create({
     tudo: {
@@ -29,6 +30,8 @@ const estilos = StyleSheet.create({
 
 const TelaCadastro = (props) => {
 
+    const toast = useToast()
+
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
     const [email, setEmail] = useState('');
@@ -45,7 +48,10 @@ const TelaCadastro = (props) => {
                 telefone_cliente: +telefone,
             };
             await api.post('/cliente', usuario)
-            alert('Dados salvos com sucesso!');
+            toast.show({
+                description: 'dados salvos',
+                placement: 'top'
+            })
             props.navigation.navigate(TELAS.TELA_LOGIN);
             console.log(usuario)
         } catch (error) {
