@@ -1,13 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { View, Alert } from 'react-native';
+import { View, Alert, StyleSheet } from 'react-native';
 import BotaoCustomizado from '../../comum/componentes/BotaoCustomizado/BotaoCustomizado';
 import CampoTextoCustomizado from '../../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado';
 import TELAS from '../../comum/constantes/telas';
 import api from '../../comum/servicos/api';
 import { pegarItemStorage } from '../../comum/servicos/servicosStorage';
 import { CHAVES_SOTORAGE } from '../../comum/constantes/ChavesStorage';
+import { useToast } from 'native-base';
+import CORES from '../../comum/constantes/cores';
 
-const EditarPerfil = (props) => {
+
+
+
+
+const estilos = StyleSheet.create({
+  tudo: {
+      flex: 1,
+      alignItems: 'center',
+      marginTop: 30,
+  },
+  input: {
+      padding: 10,
+      width: 300,
+      borderWidth: 2,
+      margin: 15,
+      fontSize: 20,
+  },
+  botao: {
+      alignItems: 'center',
+      backgroundColor: CORES.FUNDO_ESCURO,
+      borderRadius: 30,
+  },
+})
+
+const TelaEditarPerfil = (props) => {
+
+  const toast = useToast()
+
   const [campoNome, setCampoNome] = useState('');
   const [campoEmail, setCampoEmail] = useState('');
   const [campoTelefone, setCampoTelefone] = useState('');
@@ -43,18 +72,22 @@ const EditarPerfil = (props) => {
       } else {
         await api.post('/cliente', usuario);
       }
-      Alert.alert('Sucesso', 'Dados salvos com sucesso!');
+      toast.show({
+        description: 'dados salvos com sucesso',
+        placement: 'top',
+      });
       props.navigation.navigate(TELAS.TELA_PRINCIPAL, { refresh: +new Date() });
     } catch (error) {
-      Alert.alert('Erro', error.response.data);
+      toast.show({
+        description: error.response.data,
+        placement: 'top',
+      })
     }
   };
 
   const excluir = async () => {
     try {
-      Alert.alert(
-        'Confirmação',
-        'Tem certeza?',
+     
         [
           { text: 'Cancelar', style: 'cancel' },
           {
@@ -97,4 +130,4 @@ const EditarPerfil = (props) => {
   );
 };
 
-export default EditarPerfil;
+export default TelaEditarPerfil;

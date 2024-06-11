@@ -7,9 +7,7 @@ import TELAS from "../comum/constantes/telas";
 import { CHAVES_SOTORAGE } from "../comum/constantes/ChavesStorage";
 import api from "../comum/servicos/api";
 import { atualizarItemStorage } from "../comum/servicos/servicosStorage";
-import ListagemVazia from "../comum/componentes/ListagemVazia";
-import SeparadorLista from "../comum/componentes/SeparadorLista";
-import ItemLista from "../comum/componentes/ItemLista";
+
 
 
 const estilos = StyleSheet.create({
@@ -48,6 +46,8 @@ const estilos = StyleSheet.create({
 });
 
 const TelaLogin = (props) => {
+  const toast = useToast()
+  
   const [clientes, setClientes] = useState([])
   const [campoEmail, setEmail] = useState('');
   const [campoSenha, setSenha] = useState('');
@@ -63,7 +63,10 @@ const TelaLogin = (props) => {
       props.navigation.navigate(TELAS.TELA_PRINCIPAL);
 
     } catch (error) {
-      alert(error.response.data);
+      toast.show({
+        description: error.response.data,
+        placement: 'top',
+      });
     }
   };
 

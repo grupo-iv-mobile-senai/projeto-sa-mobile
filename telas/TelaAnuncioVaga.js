@@ -5,7 +5,6 @@ import TELAS from "../comum/constantes/telas"
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado"
 import CORES from "../comum/constantes/cores"
 import api from "../comum/servicos/api"
-import RNPickerSelect from 'react-native-picker-select';
 import { useToast } from 'native-base';
 import { Select } from 'native-base'
 
@@ -14,28 +13,6 @@ import { Select } from 'native-base'
 const TelaAnuncioVaga = (props) => {
     const toast = useToast()
 
-    const pickerSelectStyles = StyleSheet.create({
-        inputIOS: {
-            fontSize: 16,
-            paddingVertical: 12,
-            paddingHorizontal: 10,
-            borderWidth: 1,
-            borderColor: 'gray',
-            borderRadius: 4,
-            color: 'black',
-            paddingRight: 30,
-        },
-        inputAndroid: {
-            fontSize: 16,
-            paddingHorizontal: 10,
-            paddingVertical: 8,
-            borderWidth: 0.5,
-            borderColor: 'purple',
-            borderRadius: 8,
-            color: 'black',
-            paddingRight: 30,
-        },
-    })
 
     const estilos = StyleSheet.create({
         tudo: {

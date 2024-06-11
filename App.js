@@ -12,6 +12,7 @@ import { CHAVES_SOTORAGE } from './comum/constantes/ChavesStorage';
 import TelaAnuncioVaga from './telas/TelaAnuncioVaga';
 import TelaPerfil from './telas/TelaPerfil';
 import { NativeBaseProvider } from 'native-base'
+import TelaEditarPerfil from './telas/TelaEditarPerfil/TelaEditarPerfil';
 
 
 // useEffect(() => {
@@ -54,6 +55,7 @@ export default function App() {
             <Stack.Screen name={TELAS.TELA_PERFIL} component={TelaPerfil} />
             <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
             <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
+            <Stack.Screen name={TELAS.TELA_EDITAR_PERFIL} component={TelaEditarPerfil}/>
           </Stack.Navigator>
         </NavigationContainer>
       </View>
