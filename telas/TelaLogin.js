@@ -93,7 +93,7 @@ const TelaLogin = (props) => {
       <BotaoCustomizado style={estilos.botao} onPress={entrar}>
         Entrar
       </BotaoCustomizado>
-      
+
       <BotaoCustomizado style={estilos.botao} onPress={() => {
         props.navigation.navigate(TELAS.TELA_CADASTRO)
       }}
@@ -101,7 +101,7 @@ const TelaLogin = (props) => {
         novo cadastro
       </BotaoCustomizado>
 
- 
+
     </View>
   );
 

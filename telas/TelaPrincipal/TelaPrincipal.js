@@ -3,7 +3,6 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native"
 import BotaoCustomizado from "../../comum/componentes/BotaoCustomizado/BotaoCustomizado";
 import cores from "../../comum/constantes/cores"
 import TELAS from "../../comum/constantes/telas";
-import CardVagas from "../../comum/componentes/CardVagas/CardVaga";
 import TelaLogin from "../TelaLogin";
 import ItemLista from "../../comum/componentes/ItemLista";
 import ListagemVazia from "../../comum/componentes/ListagemVazia";
@@ -24,7 +23,7 @@ const estilos = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: cores.FUNDO_MAIS_ESCURO,
-   }
+   },
 
 });
 
@@ -37,11 +36,9 @@ const TelaPrincipal = (props) => {
          setVagas(res.data)
       }
       buscarVaga()
-   }, [])
-
+   }, [props.route.params?.refresh])
 
    return (
-
 
       <View style={estilos.container}>
          <BotaoCustomizado

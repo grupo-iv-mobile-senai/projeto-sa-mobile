@@ -51,13 +51,13 @@ id_vaga INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 nome_vaga VARCHAR(45),
 capacidade INT,
 valor DECIMAL (4.6),
-logadouro VARCHAR(100),
+logradouro VARCHAR(100),
 bairro VARCHAR(100),
 cidade VARCHAR(100),
 estado VARCHAR(100)
 );
 ALTER TABLE cadastro_vaga
-RENAME COLUMN logadouro TO logradouro;
+ADD COLUMN veiculo ENUM('moto', 'carro', 'van', 'caminhao');
 
 select* from cadastro_vaga;
 

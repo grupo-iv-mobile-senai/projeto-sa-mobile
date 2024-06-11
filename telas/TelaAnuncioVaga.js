@@ -1,26 +1,54 @@
-import { StyleSheet, View, Text } from "react-native"
+import { StyleSheet, ScrollView, Text, View } from "react-native"
 import CampoTextoCustomizado from "../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado"
 import { useState } from "react"
 import TELAS from "../comum/constantes/telas"
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado"
 import CORES from "../comum/constantes/cores"
 import api from "../comum/servicos/api"
+import RNPickerSelect from 'react-native-picker-select';
+import { useToast } from 'native-base';
+import { Select } from 'native-base'
+
 
 
 const TelaAnuncioVaga = (props) => {
+    const toast = useToast()
+
+    const pickerSelectStyles = StyleSheet.create({
+        inputIOS: {
+            fontSize: 16,
+            paddingVertical: 12,
+            paddingHorizontal: 10,
+            borderWidth: 1,
+            borderColor: 'gray',
+            borderRadius: 4,
+            color: 'black',
+            paddingRight: 30,
+        },
+        inputAndroid: {
+            fontSize: 16,
+            paddingHorizontal: 10,
+            paddingVertical: 8,
+            borderWidth: 0.5,
+            borderColor: 'purple',
+            borderRadius: 8,
+            color: 'black',
+            paddingRight: 30,
+        },
+    })
 
     const estilos = StyleSheet.create({
         tudo: {
             flex: 1,
-            alignItems: 'center',
-            marginTop: 50
+
         },
         input: {
             padding: 5,
             width: 330,
             margin: 5,
             fontSize: 22,
-            borderWidth: 2
+            borderWidth: 2,
+            borderRadius: 10
         },
         texto: {
             fontSize: 24,
@@ -30,13 +58,24 @@ const TelaAnuncioVaga = (props) => {
             alignItems: 'center',
             backgroundColor: CORES.FUNDO_ESCURO,
             borderRadius: 30
-        }
+        },
+        viewSelect: {
+            padding: 5,
+            width: 330,
+            margin: 5,
+            fontSize: 22,
+        },
+        select: {
+            fontSize: 18,
+            borderWidth: 2,
+        },
 
     })
 
     const [nomeVaga, setNomeVaga] = useState('')
     const [capacidade, setCapacidade] = useState('')
     const [valor, setValor] = useState('')
+    const [veiculo, setVeiculo] = useState('')
     const [logradouro, setLogradouro] = useState('')
     const [bairro, setBairro] = useState('')
     const [cidade, setCidade] = useState('')
@@ -48,6 +87,7 @@ const TelaAnuncioVaga = (props) => {
                 nome_vaga: nomeVaga,
                 capacidade: capacidade,
                 valor: valor,
+                veiculo: veiculo,
                 logradouro: logradouro,
                 bairro: bairro,
                 cidade: cidade,
@@ -55,29 +95,50 @@ const TelaAnuncioVaga = (props) => {
             }
             console.log(vaga)
             await api.post('/adicionar_vaga', vaga)
-            alert('vaga salva ')
-            props.navigation.navigate(TELAS.TELA_PRINCIPAL)
+            toast.show({
+                description: 'vaga salva',
+                placement: 'top',
+            })
+            props.navigation.navigate(TELAS.TELA_PRINCIPAL, { refresh: +new Date() })
         }
         catch (error) {
-            alert(error.response.data)
+            toast.show({
+                description: error.response.data,
+                placement: 'top',
+            })
         }
     }
 
 
-    return (
-        <View style={estilos.tudo}>
-            <Text style={estilos.texto}>Informações da Vaga</Text>
-            <CampoTextoCustomizado style={estilos.input} label='nome da vaga' value={nomeVaga} onChangeText={setNomeVaga} />
-            <CampoTextoCustomizado style={estilos.input} label='capacidade' value={capacidade} onChangeText={setCapacidade} />
-            <CampoTextoCustomizado style={estilos.input} label='valor' value={valor} onChangeText={setValor} />
-            <Text style={estilos.texto}>Endereço</Text>
-            <CampoTextoCustomizado style={estilos.input} label='logradouro' value={logradouro} onChangeText={setLogradouro} />
-            <CampoTextoCustomizado style={estilos.input} label='bairro' value={bairro} onChangeText={setBairro} />
-            <CampoTextoCustomizado style={estilos.input} label='cidade' value={cidade} onChangeText={setCidade} />
-            <CampoTextoCustomizado style={estilos.input} label='estado' value={estado} onChangeText={setEstado} />
 
-            <BotaoCustomizado onPress={cadastrarVaga} style={estilos.botao}>cadastrar vaga</BotaoCustomizado>
-        </View>
+    return (
+        <ScrollView style={estilos.tudo}>
+            <View style={{ alignItems: 'center' }}>
+
+                <Text style={estilos.texto}>Informações da Vaga</Text>
+                <CampoTextoCustomizado style={estilos.input} label='nome da vaga' value={nomeVaga} onChangeText={setNomeVaga} />
+                <CampoTextoCustomizado style={estilos.input} label='capacidade' value={capacidade} onChangeText={setCapacidade} />
+                <CampoTextoCustomizado style={estilos.input} label='valor' value={valor} onChangeText={setValor} />
+                <View style={estilos.viewSelect}>
+                    <Select style={estilos.select}
+                        selectedValue={veiculo}
+                        placeholder="selecione o veiculo"
+                        onValueChange={itemValue => setVeiculo(itemValue)}>
+                        <Select.Item label="moto" value="moto" />
+                        <Select.Item label="carro" value="carro" />
+                        <Select.Item label="van" value="van" />
+                        <Select.Item label="caminhão" value="caminhao" />
+                    </Select>
+                </View>
+                <Text style={estilos.texto}>Endereço</Text>
+                <CampoTextoCustomizado style={estilos.input} label='logradouro' value={logradouro} onChangeText={setLogradouro} />
+                <CampoTextoCustomizado style={estilos.input} label='bairro' value={bairro} onChangeText={setBairro} />
+                <CampoTextoCustomizado style={estilos.input} label='cidade' value={cidade} onChangeText={setCidade} />
+                <CampoTextoCustomizado style={estilos.input} label='estado' value={estado} onChangeText={setEstado} />
+
+                <BotaoCustomizado onPress={cadastrarVaga} style={estilos.botao}>cadastrar vaga</BotaoCustomizado>
+            </View>
+        </ScrollView>
     )
 }
 
