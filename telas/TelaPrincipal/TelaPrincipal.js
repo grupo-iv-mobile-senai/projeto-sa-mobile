@@ -32,7 +32,7 @@ const TelaPrincipal = (props) => {
 
    useEffect(() => {
       const buscarVaga = async () => {
-         const res = await api.get('/listar_vagas')
+         const res = await api.get(/listar_vagas/)
          setVagas(res.data)
       }
       buscarVaga()
