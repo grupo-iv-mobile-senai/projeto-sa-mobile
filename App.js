@@ -50,12 +50,12 @@ export default function App() {
         <StatusBar style='auto' />
         <NavigationContainer >
           <Stack.Navigator screenOptions={{ cardStyle: { flex: 1 } }}>
-            <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
-            <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
-            <Stack.Screen name={TELAS.TELA_PERFIL} component={TelaPerfil} />
-            <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
-            <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
             <Stack.Screen name={TELAS.TELA_EDITAR_PERFIL} component={TelaEditarPerfil}/>
+            <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
+            <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
+            <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
+            <Stack.Screen name={TELAS.TELA_PERFIL} component={TelaPerfil} />
+            <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
