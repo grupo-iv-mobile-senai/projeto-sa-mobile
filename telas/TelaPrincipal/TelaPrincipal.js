@@ -22,8 +22,15 @@ const estilos = StyleSheet.create({
       borderRadius: 8,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: cores.FUNDO_MAIS_ESCURO,
+      backgroundColor: cores.FUNDO_ESCURO,
    },
+   botaoPerfil: {
+      height: 60,
+      borderRadius: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: cores.FUNDO_CLARO,
+   }
 
 });
 
@@ -32,7 +39,7 @@ const TelaPrincipal = (props) => {
 
    useEffect(() => {
       const buscarVaga = async () => {
-         const res = await api.get(/listar_vagas/)
+         const res = await api.get('/listar_vagas/')
          setVagas(res.data)
       }
       buscarVaga()
@@ -45,7 +52,7 @@ const TelaPrincipal = (props) => {
             style={estilos.botaoAnunciar}
             onPress={() => props.navigation.navigate(TELAS.TELA_ANUNCIO)}
          >anunciar vaga</BotaoCustomizado>
-         <BotaoCustomizado onPress={() => props.navigation.navigate(TELAS.TELA_EDITAR_PERFIL)}>meu perfil</BotaoCustomizado>
+         <BotaoCustomizado style={estilos.botaoPerfil} onPress={() => props.navigation.navigate(TELAS.TELA_EDITAR_PERFIL)}>meu perfil</BotaoCustomizado>
          <FlatList
             data={vagas}
             renderItem={ItemLista}

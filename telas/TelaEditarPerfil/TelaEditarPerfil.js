@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Alert } from "react-native";
+import { View, Alert, StyleSheet, ScrollView } from "react-native";
 import BotaoCustomizado from "../../comum/componentes/BotaoCustomizado/BotaoCustomizado";
 import CampoTextoCustomizado from "../../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado";
 import TELAS from "../../comum/constantes/telas";
@@ -12,8 +12,7 @@ import CORES from "../../comum/constantes/cores";
 const estilos = StyleSheet.create({
   tudo: {
     flex: 1,
-    alignItems: "center",
-    marginTop: 30,
+    marginTop: 10,
   },
   input: {
     padding: 10,
@@ -22,11 +21,16 @@ const estilos = StyleSheet.create({
     margin: 15,
     fontSize: 20,
   },
-  botao: {
+  botao_salvar: {
     alignItems: "center",
     backgroundColor: CORES.FUNDO_ESCURO,
     borderRadius: 30,
   },
+  botao_excluir: {
+    alignItems: "center",
+    backgroundColor: "red",
+    borderRadius: 30,
+  }
 });
 
 const TelaEditarPerfil = (props) => {
@@ -48,6 +52,7 @@ const TelaEditarPerfil = (props) => {
         setCampoNome(usuarioQueEstaNoStorage.nome_cliente);
         setCampoEmail(usuarioQueEstaNoStorage.email_cliente);
         setCampoTelefone(usuarioQueEstaNoStorage.telefone_cliente);
+        setCampoNovaSenha(usuarioQueEstaNoStorage.senha_cliente)
       }
     };
 
@@ -67,10 +72,16 @@ const TelaEditarPerfil = (props) => {
       if (idCliente) {
         await api.put("/cliente", usuario);
       }
-      Alert.alert("Sucesso", "Dados salvos com sucesso!");
+      toast.show({
+        description: 'dados alterados com sucesso',
+        placement: 'top'
+      })
       props.navigation.navigate(TELAS.TELA_PRINCIPAL, { refresh: +new Date() });
     } catch (error) {
-      Alert.alert("Erro", error.response.data);
+      toast.show({
+        description: error.response.data,
+        placement: 'top'
+      });
     }
   };
 
@@ -81,7 +92,7 @@ const TelaEditarPerfil = (props) => {
         props.navigation.navigate(TELAS.TELA_LOGIN, { refresh: +new Date() });
       }
     } catch (error) {
-      Toast.show({
+      toast.show({
         description: error.response.data,
         placement: "top",
       });
@@ -89,41 +100,44 @@ const TelaEditarPerfil = (props) => {
   };
 
   return (
-    <View style={{ padding: 16, gap: 16 }}>
-      {idCliente && (
-        <CampoTextoCustomizado label="ID" value={idCliente} disabled readonly />
-      )}
+    <ScrollView style={estilos.tudo}>
+      <View style={{alignItems: 'center'}}>
 
-      <CampoTextoCustomizado
-        label="Nome"
-        value={campoNome}
-        onChangeText={setCampoNome}
-      />
-      <CampoTextoCustomizado
-        label="E-mail"
-        value={campoEmail}
-        onChangeText={setCampoEmail}
-      />
-      <CampoTextoCustomizado
-        label="Telefone"
-        value={campoTelefone}
-        onChangeText={setCampoTelefone}
-      />
+        {idCliente && (
+          <CampoTextoCustomizado style={estilos.input} label="ID" value={idCliente} disabled readonly />
+        )}
 
-      <CampoTextoCustomizado
-        label="Nova Senha"
-        value={campoNovaSenha}
-        onChangeText={setCampoNovaSenha}
-      />
+        <CampoTextoCustomizado style={estilos.input}
+          label="Nome"
+          value={campoNome}
+          onChangeText={setCampoNome}
+        />
+        <CampoTextoCustomizado style={estilos.input}
+          label="E-mail"
+          value={campoEmail}
+          onChangeText={setCampoEmail}
+        />
+        <CampoTextoCustomizado style={estilos.input}
+          label="Telefone"
+          value={campoTelefone}
+          onChangeText={setCampoTelefone}
+        />
 
-      <BotaoCustomizado cor="primaria" onPress={salvar}>
-        Salvar
-      </BotaoCustomizado>
+        <CampoTextoCustomizado style={estilos.input}
+          label="Nova Senha"
+          value={campoNovaSenha}
+          onChangeText={setCampoNovaSenha}
+        />
 
-      <BotaoCustomizado cor="secundaria" onPress={excluir}>
-        Excluir
-      </BotaoCustomizado>
-    </View>
+        <BotaoCustomizado style={estilos.botao_salvar} cor="primaria" onPress={salvar}>
+          Salvar
+        </BotaoCustomizado>
+
+        <BotaoCustomizado style={estilos.botao_excluir} cor="secundaria" onPress={excluir}>
+          Excluir
+        </BotaoCustomizado>
+      </View>
+    </ScrollView>
   );
 };
 

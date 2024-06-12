@@ -13,6 +13,7 @@ import TelaDetalhesVaga from "./telas/TelaDetalhesVaga";
 import TelaEditarPerfil from "./telas/TelaEditarPerfil/TelaEditarPerfil";
 import TelaLogin from "./telas/TelaLogin";
 import TelaPrincipal from "./telas/TelaPrincipal/TelaPrincipal";
+import CabecalhoCustomizado from "./comum/componentes/CabecalhoCustomizado";
 
 // useEffect(() => {
 //   buscarStorage();
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [usuariologado, setUsuariologado] = useState();
+  const [usuarioLogado, setUsuariologado] = useState();
   useEffect(() => {
     const verificarUsuarioLogado = async () => {
       const usuarioNoStorage = await pegarItemStorage(
@@ -39,7 +40,7 @@ export default function App() {
     };
     verificarUsuarioLogado();
   }, []);
-  if (usuariologado === undefined) {
+  if (usuarioLogado === undefined) {
     return <></>;
   }
   return (
@@ -47,25 +48,19 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <NavigationContainer>
-          <Stack.Navigator screenOptions={{ cardStyle: { flex: 1 } }}>
-            <Stack.Screen
-              name={TELAS.TELA_PRINCIPAL}
-              component={TelaPrincipal}
-            />
-            <Stack.Screen
-              name={TELAS.TELA_DETALHES_VAGA}
-              component={TelaDetalhesVaga}
-            />
-            <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
-            <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
-            <Stack.Screen
-              name={TELAS.TELA_ANUNCIO}
-              component={TelaAnuncioVaga}
-            />
-            <Stack.Screen
-              name={TELAS.TELA_EDITAR_PERFIL}
-              component={TelaEditarPerfil}
-            />
+          <Stack.Navigator
+            initialRouteName={usuarioLogado ? TELAS.TELA_PRINCIPAL : TELAS.TELA_LOGIN}
+            screenOptions={{ cardStyle: { flex: 1 }, header: CabecalhoCustomizado }}>
+
+            <Stack.Group screenOptions={{ headerShown: false }}>
+              <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
+              <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
+
+            </Stack.Group>
+            <Stack.Screen name={TELAS.TELA_DETALHES_VAGA} component={TelaDetalhesVaga} />
+            <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
+            <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
+            <Stack.Screen name={TELAS.TELA_EDITAR_PERFIL} component={TelaEditarPerfil} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

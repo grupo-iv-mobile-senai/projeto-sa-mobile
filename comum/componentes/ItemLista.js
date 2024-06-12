@@ -45,7 +45,7 @@ const ItemLista = (props) => {
   };
 
   return (
-    <Pressable onPress={() => props.navigation.navigate(TELAS.TELA_DETALHES_VAGA, { id_vaga: props.item.id_vaga })}>
+    <Pressable onPress={() => props.navigation.navigate(TELAS.TELA_DETALHES_VAGA)}>
       <View style={estilos.container}>
         <Icon name={buscarIcone(props.item.veiculo)} size={50} color="black" style={estilos.icone} />
         <View style={estilos.detalhesContainer}>

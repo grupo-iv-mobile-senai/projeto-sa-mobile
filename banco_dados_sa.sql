@@ -74,8 +74,6 @@ INSERT INTO cliente
 VALUES
 ('pedrinho matador', '3539864091', '35986431242', 'pedrinhofilho@hotmail.com','12345');
 
-drop database estacionamento_sa
-
 INSERT INTO cadastro_vaga
 (nome_vaga) 
 VALUES
