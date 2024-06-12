@@ -2,7 +2,6 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import CORES from '../../comum/constantes/cores';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import TELAS from '../constantes/telas';
-import { useNavigation } from '@react-navigation/native';
 
 const estilos = StyleSheet.create({
   container: {
@@ -30,7 +29,6 @@ const estilos = StyleSheet.create({
 
 const ItemLista = (props) => {
 
-  const navigation = useNavigation()
 
   const buscarIcone = (veiculo) => {
     switch (veiculo) {
@@ -48,7 +46,7 @@ const ItemLista = (props) => {
   };
 
   return (
-    <Pressable onPress={() => navigation.navigate(TELAS.TELA_DETALHES_VAGA)}>
+    <Pressable onPress={() => props.navigation.navigate(TELAS.TELA_DETALHES_VAGA)}>
       <View style={estilos.container}>
         <Icon name={buscarIcone(props.item.veiculo)} size={50} color="black" style={estilos.icone} />
         <View style={estilos.detalhesContainer}>
