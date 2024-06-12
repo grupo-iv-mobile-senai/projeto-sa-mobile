@@ -14,11 +14,6 @@ const estilos = StyleSheet.create({
         backgroundColor: CORES.FUNDO_MAIS_ESCURO,
         height: 48,
     },
-    image: {
-        width: 200, // largura da imagem
-        height: 200, // altura da imagem
-        resizeMode: 'contain', // opcional, ajusta como a imagem se encaixa
-    },
     botao:{
         backgroundColor: CORES.FUNDO_MAIS_CLARO,
         alignItems: 'center',
@@ -43,7 +38,6 @@ const CabecalhoCustomizado = (props) => {
 
     return (
         <View style={estilos.tudo}>
-            {/* <Image source={require('../assets/logo.png')} style={estilos.image} /> */}
             <BotaoCustomizado style={estilos.botao} onPress={() => props.navigation.navigate(TELAS.TELA_LOGIN)}>
                 <View>
                     <Text>sair</Text>

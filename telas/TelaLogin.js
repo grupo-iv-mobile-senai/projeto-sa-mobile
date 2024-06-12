@@ -1,5 +1,5 @@
 
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, Image, StyleSheet, View } from "react-native";
 import CampoTextoCustomizado from "../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado";
 import BotaoCustomizado from "../comum/componentes/BotaoCustomizado/BotaoCustomizado";
 import React, { useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import { CHAVES_SOTORAGE } from "../comum/constantes/ChavesStorage";
 import api from "../comum/servicos/api";
 import { atualizarItemStorage } from "../comum/servicos/servicosStorage";
 import { useToast } from "native-base";
+import CORES from "../comum/constantes/cores";
 
 
 
@@ -29,7 +30,7 @@ const estilos = StyleSheet.create({
     fontSize: 20,
   },
   botao: {
-    backgroundColor: "orange",
+    backgroundColor: CORES.FUNDO_ESCURO,
     alignItems: "center",
     borderRadius: 40,
     width: 240,
@@ -45,11 +46,16 @@ const estilos = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
   },
+  image: {
+    height: 240,
+    width: 240,
+    resizeMode: 'contain',
+  },
 });
 
 const TelaLogin = (props) => {
   const toast = useToast()
-  
+
   const [clientes, setClientes] = useState([])
   const [campoEmail, setEmail] = useState('');
   const [campoSenha, setSenha] = useState('');
@@ -82,6 +88,10 @@ const TelaLogin = (props) => {
 
   return (
     <View style={estilos.tudo}>
+      <Image
+        source={require('../assets/logo.png')} // URL da imagem
+        style={estilos.image}
+      />
       <CampoTextoCustomizado
         style={estilos.input}
         label="Email"

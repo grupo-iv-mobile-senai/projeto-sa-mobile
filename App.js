@@ -14,6 +14,7 @@ import TelaEditarPerfil from "./telas/TelaEditarPerfil/TelaEditarPerfil";
 import TelaLogin from "./telas/TelaLogin";
 import TelaPrincipal from "./telas/TelaPrincipal/TelaPrincipal";
 import CabecalhoCustomizado from "./comum/componentes/CabecalhoCustomizado";
+import BotaoVoltar from "./comum/componentes/BotaoVoltar";
 
 // useEffect(() => {
 //   buscarStorage();
@@ -55,12 +56,14 @@ export default function App() {
             <Stack.Group screenOptions={{ headerShown: false }}>
               <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
               <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
-
             </Stack.Group>
-            <Stack.Screen name={TELAS.TELA_DETALHES_VAGA} component={TelaDetalhesVaga} />
-            <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
+
             <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
-            <Stack.Screen name={TELAS.TELA_EDITAR_PERFIL} component={TelaEditarPerfil} />
+            <Stack.Group screenOptions={{ header: BotaoVoltar }}>
+              <Stack.Screen name={TELAS.TELA_DETALHES_VAGA} component={TelaDetalhesVaga} />
+              <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
+              <Stack.Screen name={TELAS.TELA_EDITAR_PERFIL} component={TelaEditarPerfil} />
+            </Stack.Group>
           </Stack.Navigator>
         </NavigationContainer>
       </View>
