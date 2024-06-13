@@ -5,6 +5,7 @@ import TELAS from "../constantes/telas";
 import { CHAVES_SOTORAGE } from "../constantes/ChavesStorage";
 import CORES from "../constantes/cores";
 import BotaoCustomizado from "./BotaoCustomizado/BotaoCustomizado";
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 
 const estilos = StyleSheet.create({
     tudo: {
@@ -13,19 +14,20 @@ const estilos = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: CORES.FUNDO_MAIS_ESCURO,
         height: 48,
+        padding: 5,
     },
-    botao:{
-        backgroundColor: CORES.FUNDO_MAIS_CLARO,
+    botao: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 80,
-        borderRadius: 30,
+       
+    },
+    perfil: {
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
 
 const CabecalhoCustomizado = (props) => {
-    const [usuarioLogado, setUsuarioLogado] = useState();
-    const [image, setImage] = useState(null);
 
     useEffect(() => {
         const verificarSeUsuarioEstaLogado = async () => {
@@ -38,11 +40,13 @@ const CabecalhoCustomizado = (props) => {
 
     return (
         <View style={estilos.tudo}>
-            <BotaoCustomizado style={estilos.botao} onPress={() => props.navigation.navigate(TELAS.TELA_LOGIN)}>
-                <View>
-                    <Text>sair</Text>
-                </View>
-            </BotaoCustomizado>
+            <Pressable style={estilos.botao} onPress={() => props.navigation.navigate(TELAS.TELA_LOGIN)}>
+                <FontAwesome name="exit-outline" size={48} color={CORES.FUNDO_ESCURO} />
+
+            </Pressable>
+            <Pressable style={estilos.perfil} onPress={() => props.navigation.navigate(TELAS.TELA_EDITAR_PERFIL)}>
+                <Ionicons name="user-circle" size={48} color={CORES.FUNDO_CLARO} />
+            </Pressable>
         </View>
     );
 };

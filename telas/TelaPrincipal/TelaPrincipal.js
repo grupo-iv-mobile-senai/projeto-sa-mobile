@@ -52,10 +52,9 @@ const TelaPrincipal = (props) => {
             style={estilos.botaoAnunciar}
             onPress={() => props.navigation.navigate(TELAS.TELA_ANUNCIO)}
          >anunciar vaga</BotaoCustomizado>
-         <BotaoCustomizado style={estilos.botaoPerfil} onPress={() => props.navigation.navigate(TELAS.TELA_EDITAR_PERFIL)}>meu perfil</BotaoCustomizado>
          <FlatList
             data={vagas}
-            renderItem={ItemLista}
+            renderItem={(props) => <ItemLista {...props} />}
             ListEmptyComponent={ListagemVazia}
             keyExtractor={(item) => item.id_vaga}
             ItemSeparatorComponent={SeparadorLista}
