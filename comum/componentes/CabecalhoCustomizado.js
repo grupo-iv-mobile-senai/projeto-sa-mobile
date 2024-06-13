@@ -4,8 +4,8 @@ import { pegarItemStorage } from "../servicos/servicosStorage";
 import TELAS from "../constantes/telas";
 import { CHAVES_SOTORAGE } from "../constantes/ChavesStorage";
 import CORES from "../constantes/cores";
-import BotaoCustomizado from "./BotaoCustomizado/BotaoCustomizado";
 import FontAwesome from '@expo/vector-icons/FontAwesome'
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 const estilos = StyleSheet.create({
     tudo: {
@@ -41,11 +41,11 @@ const CabecalhoCustomizado = (props) => {
     return (
         <View style={estilos.tudo}>
             <Pressable style={estilos.botao} onPress={() => props.navigation.navigate(TELAS.TELA_LOGIN)}>
-                <FontAwesome name="exit-outline" size={48} color={CORES.FUNDO_ESCURO} />
+                <Ionicons name="exit-outline" size={48} color={CORES.FUNDO_ESCURO} />
 
             </Pressable>
             <Pressable style={estilos.perfil} onPress={() => props.navigation.navigate(TELAS.TELA_EDITAR_PERFIL)}>
-                <Ionicons name="user-circle" size={48} color={CORES.FUNDO_CLARO} />
+                <FontAwesome name="user-circle" size={48} color={CORES.FUNDO_CLARO} />
             </Pressable>
         </View>
     );
