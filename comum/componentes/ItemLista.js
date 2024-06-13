@@ -30,6 +30,8 @@ const estilos = StyleSheet.create({
 });
 
 const ItemLista = (props) => {
+
+
   const buscarIcone = (veiculo) => {
     switch (veiculo) {
       case "moto":
