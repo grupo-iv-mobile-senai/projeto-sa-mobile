@@ -1,17 +1,19 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import CORES from '../../comum/constantes/cores';
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import TELAS from '../constantes/telas';
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import CORES from "../../comum/constantes/cores";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import TELAS from "../constantes/telas";
+import { useNavigation } from "@react-navigation/native";
+import { limparStorage } from "../servicos/servicosStorage";
 
 const estilos = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
     backgroundColor: CORES.FUNDO_CARD,
     margin: 5,
     padding: 10,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
     width: 300,
   },
   texto: {
@@ -22,32 +24,45 @@ const estilos = StyleSheet.create({
     marginRight: 10,
   },
   detalhesContainer: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-  }
+    flexDirection: "column",
+    justifyContent: "flex-start",
+  },
 });
 
 const ItemLista = (props) => {
-
   const buscarIcone = (veiculo) => {
     switch (veiculo) {
-      case 'moto':
-        return 'motorbike';
-      case 'carro':
-        return 'car';
-      case 'van':
-        return 'van-passenger';
-      case 'caminhao':
-        return 'truck';
+      case "moto":
+        return "motorbike";
+      case "carro":
+        return "car";
+      case "van":
+        return "van-passenger";
+      case "caminhao":
+        return "truck";
       default:
-        return 'help-circle';
+        return "help-circle";
     }
   };
+  console.log(props);
+
+  const navigation = useNavigation();
 
   return (
-    <Pressable onPress={() => props.navigation.navigate(TELAS.TELA_DETALHES_VAGA)}>
+    <Pressable
+      onPress={() =>
+        navigation.navigate(TELAS.TELA_DETALHES_VAGA, {
+          vaga: props.item,
+        })
+      }
+    >
       <View style={estilos.container}>
-        <Icon name={buscarIcone(props.item.veiculo)} size={50} color="black" style={estilos.icone} />
+        <Icon
+          name={buscarIcone(props.item.veiculo)}
+          size={50}
+          color="black"
+          style={estilos.icone}
+        />
         <View style={estilos.detalhesContainer}>
           <Text style={estilos.texto}>{props.item.nome_vaga}</Text>
           <Text style={estilos.texto}>Endereço: {props.item.logradouro}</Text>
