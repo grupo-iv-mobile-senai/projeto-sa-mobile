@@ -8,7 +8,8 @@ const CampoTextoCustomizado = (props) => {
             border: '1px solid black',
         },
         texto: {
-            fontSize: 20,
+            fontSize: 22,
+            fontWeight: 'bold'
         },
     })
     const [campoNome, setCampoNome] = React.useState('')

@@ -4,7 +4,7 @@ import BotaoCustomizado from "../../comum/componentes/BotaoCustomizado/BotaoCust
 import CampoTextoCustomizado from "../../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado";
 import TELAS from "../../comum/constantes/telas";
 import api from "../../comum/servicos/api";
-import { pegarItemStorage } from "../../comum/servicos/servicosStorage";
+import { limparStorage, pegarItemStorage } from "../../comum/servicos/servicosStorage";
 import { CHAVES_SOTORAGE } from "../../comum/constantes/ChavesStorage";
 import { useToast } from "native-base";
 import CORES from "../../comum/constantes/cores";
@@ -76,7 +76,8 @@ const TelaEditarPerfil = (props) => {
         description: 'dados alterados com sucesso',
         placement: 'top'
       })
-      props.navigation.navigate(TELAS.TELA_PRINCIPAL, { refresh: +new Date() });
+      props.navigation.navigate(TELAS.TELA_LOGIN, { refresh: +new Date() });
+      limparStorage(CHAVES_SOTORAGE.USUARIO_LOGADO)
     } catch (error) {
       toast.show({
         description: error.response.data,
@@ -90,6 +91,7 @@ const TelaEditarPerfil = (props) => {
       if (confirm("tem certeza?")) {
         await api.delete("/cliente/" + idCliente);
         props.navigation.navigate(TELAS.TELA_LOGIN, { refresh: +new Date() });
+        limparStorage(CHAVES_SOTORAGE.USUARIO_LOGADO)
       }
     } catch (error) {
       toast.show({
@@ -134,7 +136,7 @@ const TelaEditarPerfil = (props) => {
         </BotaoCustomizado>
 
         <BotaoCustomizado style={estilos.botao_excluir} cor="secundaria" onPress={excluir}>
-          Excluir
+          Excluir Conta
         </BotaoCustomizado>
       </View>
     </ScrollView>

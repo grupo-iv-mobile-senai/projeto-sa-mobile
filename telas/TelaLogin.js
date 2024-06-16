@@ -11,13 +11,11 @@ import { useToast } from "native-base";
 import CORES from "../comum/constantes/cores";
 
 
-
-
 const estilos = StyleSheet.create({
   tudo: {
     flex: 1,
     alignItems: "center",
-    marginTop: 30,
+    marginTop: 10,
   },
   icone: {
     alignItems: "center",
@@ -26,7 +24,7 @@ const estilos = StyleSheet.create({
     padding: 10,
     width: 300,
     borderWidth: 2,
-    margin: 15,
+    margin: 10,
     fontSize: 20,
   },
   botao: {
@@ -34,10 +32,6 @@ const estilos = StyleSheet.create({
     alignItems: "center",
     borderRadius: 40,
     width: 240,
-    margin: 15,
-  },
-  saida: {
-    fontSize: 20,
     margin: 10,
   },
   texto: {
@@ -113,7 +107,7 @@ const TelaLogin = (props) => {
         props.navigation.navigate(TELAS.TELA_CADASTRO)
       }}
       >
-        novo cadastro
+        Novo Cadastro
       </BotaoCustomizado>
 
 

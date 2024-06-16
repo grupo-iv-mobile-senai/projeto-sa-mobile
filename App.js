@@ -52,14 +52,14 @@ export default function App() {
           <Stack.Navigator
             initialRouteName={usuarioLogado ? TELAS.TELA_PRINCIPAL : TELAS.TELA_LOGIN}
             screenOptions={{ cardStyle: { flex: 1 }, header: CabecalhoCustomizado }}>
+            <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
 
             <Stack.Group screenOptions={{ headerShown: false }}>
               <Stack.Screen name={TELAS.TELA_LOGIN} component={TelaLogin} />
-              <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
             </Stack.Group>
 
-            <Stack.Screen name={TELAS.TELA_PRINCIPAL} component={TelaPrincipal} />
             <Stack.Group screenOptions={{ header: BotaoVoltar }}>
+              <Stack.Screen name={TELAS.TELA_CADASTRO} component={TelaCadastro} />
               <Stack.Screen name={TELAS.TELA_DETALHES_VAGA} component={TelaDetalhesVaga} />
               <Stack.Screen name={TELAS.TELA_ANUNCIO} component={TelaAnuncioVaga} />
               <Stack.Screen name={TELAS.TELA_EDITAR_PERFIL} component={TelaEditarPerfil} />

@@ -7,7 +7,8 @@ const estilos = StyleSheet.create({
     width: 320,
   },
   texto: {
-    fontSize: 20,
+    fontSize: 24,
+    fontWeight: 'bold'
   },
 })
 

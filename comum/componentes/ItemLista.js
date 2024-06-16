@@ -14,10 +14,10 @@ const estilos = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     alignItems: "center",
-    width: 300,
+    width: 340,
   },
   texto: {
-    fontSize: 20,
+    fontSize: 22,
     marginLeft: 10,
   },
   icone: {
