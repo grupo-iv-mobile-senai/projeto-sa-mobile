@@ -95,7 +95,7 @@ const TelaAnuncioVaga = (props) => {
                 <Text style={estilos.texto}>Informações da Vaga</Text>
                 <CampoTextoCustomizado style={estilos.input} label='nome da vaga' value={nomeVaga} onChangeText={setNomeVaga} />
                 <CampoTextoCustomizado style={estilos.input} label='capacidade' value={capacidade} onChangeText={setCapacidade} />
-                <CampoTextoCustomizado style={estilos.input} label='valor' value={valor} onChangeText={setValor} />
+                <CampoTextoCustomizado style={estilos.input} label='valor mensal' value={valor} onChangeText={setValor} />
                 <View style={estilos.viewSelect}>
                     <Select style={estilos.select}
                         selectedValue={veiculo}

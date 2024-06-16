@@ -4,7 +4,10 @@ import BotaoCustomizado from "../../comum/componentes/BotaoCustomizado/BotaoCust
 import CampoTextoCustomizado from "../../comum/componentes/CampoTextoCustomizado/CampoTextoCustomizado";
 import TELAS from "../../comum/constantes/telas";
 import api from "../../comum/servicos/api";
-import { limparStorage, pegarItemStorage } from "../../comum/servicos/servicosStorage";
+import {
+  limparStorage,
+  pegarItemStorage,
+} from "../../comum/servicos/servicosStorage";
 import { CHAVES_SOTORAGE } from "../../comum/constantes/ChavesStorage";
 import { useToast } from "native-base";
 import CORES from "../../comum/constantes/cores";
@@ -20,6 +23,7 @@ const estilos = StyleSheet.create({
     borderWidth: 2,
     margin: 15,
     fontSize: 20,
+    borderRadius: 10,
   },
   botao_salvar: {
     alignItems: "center",
@@ -30,7 +34,7 @@ const estilos = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "red",
     borderRadius: 30,
-  }
+  },
 });
 
 const TelaEditarPerfil = (props) => {
@@ -52,7 +56,7 @@ const TelaEditarPerfil = (props) => {
         setCampoNome(usuarioQueEstaNoStorage.nome_cliente);
         setCampoEmail(usuarioQueEstaNoStorage.email_cliente);
         setCampoTelefone(usuarioQueEstaNoStorage.telefone_cliente);
-        setCampoNovaSenha(usuarioQueEstaNoStorage.senha_cliente)
+        setCampoNovaSenha(usuarioQueEstaNoStorage.senha_cliente);
       }
     };
 
@@ -71,17 +75,17 @@ const TelaEditarPerfil = (props) => {
 
       if (idCliente) {
         await api.put("/cliente", usuario);
+        props.navigation.navigate(TELAS.TELA_LOGIN, { refresh: +new Date() });
+        limparStorage(CHAVES_SOTORAGE.USUARIO_LOGADO);
+        toast.show({
+          description: "dados alterados com sucesso",
+          placement: "top",
+        });
       }
-      toast.show({
-        description: 'dados alterados com sucesso',
-        placement: 'top'
-      })
-      props.navigation.navigate(TELAS.TELA_LOGIN, { refresh: +new Date() });
-      limparStorage(CHAVES_SOTORAGE.USUARIO_LOGADO)
     } catch (error) {
       toast.show({
         description: error.response.data,
-        placement: 'top'
+        placement: "top",
       });
     }
   };
@@ -89,9 +93,13 @@ const TelaEditarPerfil = (props) => {
   const excluir = async () => {
     try {
       if (confirm("tem certeza?")) {
-        await api.delete("/cliente/"+ idCliente);
+        await api.delete("/cliente/" + idCliente);
         props.navigation.navigate(TELAS.TELA_LOGIN, { refresh: +new Date() });
-        limparStorage(CHAVES_SOTORAGE.USUARIO_LOGADO)
+        limparStorage(CHAVES_SOTORAGE.USUARIO_LOGADO);
+        toast.show({
+          description: "conta excluída",
+          placement: "top",
+        });
       }
     } catch (error) {
       toast.show({
@@ -103,39 +111,56 @@ const TelaEditarPerfil = (props) => {
 
   return (
     <ScrollView style={estilos.tudo}>
-      <View style={{alignItems: 'center'}}>
-
+      <View style={{ alignItems: "center" }}>
         {idCliente && (
-          <CampoTextoCustomizado style={estilos.input} label="ID" value={idCliente} disabled readonly />
+          <CampoTextoCustomizado
+            style={estilos.input}
+            label="ID"
+            value={idCliente}
+            disabled
+            readonly
+          />
         )}
 
-        <CampoTextoCustomizado style={estilos.input}
+        <CampoTextoCustomizado
+          style={estilos.input}
           label="Nome"
           value={campoNome}
           onChangeText={setCampoNome}
         />
-        <CampoTextoCustomizado style={estilos.input}
+        <CampoTextoCustomizado
+          style={estilos.input}
           label="E-mail"
           value={campoEmail}
           onChangeText={setCampoEmail}
         />
-        <CampoTextoCustomizado style={estilos.input}
+        <CampoTextoCustomizado
+          style={estilos.input}
           label="Telefone"
           value={campoTelefone}
           onChangeText={setCampoTelefone}
         />
 
-        <CampoTextoCustomizado style={estilos.input}
+        <CampoTextoCustomizado
+          style={estilos.input}
           label="Nova Senha"
           value={campoNovaSenha}
           onChangeText={setCampoNovaSenha}
         />
 
-        <BotaoCustomizado style={estilos.botao_salvar} cor="primaria" onPress={salvar}>
+        <BotaoCustomizado
+          style={estilos.botao_salvar}
+          cor="primaria"
+          onPress={salvar}
+        >
           Salvar
         </BotaoCustomizado>
 
-        <BotaoCustomizado style={estilos.botao_excluir} cor="secundaria" onPress={excluir}>
+        <BotaoCustomizado
+          style={estilos.botao_excluir}
+          cor="secundaria"
+          onPress={excluir}
+        >
           Excluir Conta
         </BotaoCustomizado>
       </View>

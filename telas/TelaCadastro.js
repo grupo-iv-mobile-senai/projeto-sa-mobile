@@ -62,11 +62,11 @@ const TelaCadastro = (props) => {
 
     return (
             <View style={estilos.tudo}>
-                <CampoTextoCustomizado style={estilos.input} label='nome' value={nome} onChangeText={setNome} />
-                <CampoTextoCustomizado style={estilos.input} label='email' value={email} onChangeText={setEmail} />
-                <CampoTextoCustomizado style={estilos.input} label='senha' value={senha} onChangeText={setSenha} secureTextEntry={true} />
-                <CampoTextoCustomizado style={estilos.input} label='cpf' value={cpf} onChangeText={setCpf} />
-                <CampoTextoCustomizado style={estilos.input} label='telefone' value={telefone} onChangeText={setTelefone} />
+                <CampoTextoCustomizado style={estilos.input} label='Nome' value={nome} onChangeText={setNome} />
+                <CampoTextoCustomizado style={estilos.input} label='Email' value={email} onChangeText={setEmail} />
+                <CampoTextoCustomizado style={estilos.input} label='Senha' value={senha} onChangeText={setSenha} secureTextEntry={true} />
+                <CampoTextoCustomizado style={estilos.input} label='Cpf' value={cpf} onChangeText={setCpf} />
+                <CampoTextoCustomizado style={estilos.input} label='Telefone' value={telefone} onChangeText={setTelefone} />
 
                 <BotaoCustomizado style={estilos.botao} onPress={vai}>enviar</BotaoCustomizado>
             </View>

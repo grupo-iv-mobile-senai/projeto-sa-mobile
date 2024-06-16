@@ -21,12 +21,19 @@ const estilos = StyleSheet.create({
         borderWidth: 2,
         margin: 15,
         fontSize: 22,
+        borderRadius: 10
+    },
+    botao: {
+        backgroundColor: 'red',
+        alignItems: 'center',
+        borderRadius: 50
     },
 })
 
+
 const TelaDetalhesVaga = (props) => {
     const toast = useToast()
-
+    
     const [idVaga, setIdvaga] = useState(props.route.params?.vaga.id_vaga || '')
     const [nomeVaga, setNomeVaga] = useState(props.route.params?.vaga.nome_vaga || '');
     const [valorVaga, setValorVaga] = useState(props.route.params?.vaga.valor || '')
@@ -36,35 +43,23 @@ const TelaDetalhesVaga = (props) => {
     const [bairroVaga, setBairroVaga] = useState(props.route.params?.vaga.bairro || '')
     const [cidadeVaga, setCidadeVaga] = useState(props.route.params?.vaga.cidade || '')
     const [estadoVaga, setEstadoVaga] = useState(props.route.params?.vaga.estado || '')
-
-    const salvar = async () => {
+    
+        
+    const excluir = async () => {
         try {
-            const vaga = {
-                id_vaga: idVaga,
-                nome_Vaga: nomeVaga,
-                capacidadeVaga: capacidadeVaga,
-                valorVaga: valorVaga,
-                veiculoVaga: veiculo,
-                logradouroVaga: logradouroVaga,
-                bairroVaga: bairroVaga,
-                cidadeVaga: cidadeVaga,
-                estadoVaga: estadoVaga,
-            }
-            if (idVaga) {
-                await api.put("/vaga", vaga);
-            }
-            toast.show({
-                description: 'dados alterados com sucesso',
-                placement: 'top'
-            })
+          if (confirm('Tem certeza?')) {
+            await api.delete(`/vaga/${props.route.params.vaga.id_vaga}`);
             props.navigation.navigate(TELAS.TELA_PRINCIPAL, { refresh: +new Date() });
-        } catch (error) {
             toast.show({
-                description: error.response.data,
-                placement: 'top'
+                description:'Vaga excluída com sucesso!'
             })
         }
-    }
+        } catch (error) {
+          alert(error.response.data);
+        }
+      };
+          
+    
     return (
         <ScrollView style={estilos.tudo}>
             <View style={{ alignItems: 'center' }}>
@@ -76,7 +71,7 @@ const TelaDetalhesVaga = (props) => {
                 <CampoTextoCustomizado disabled readonly style={estilos.input} label='Bairro' value={bairroVaga} onChangeTeonChangeText={setBairroVaga} />
                 <CampoTextoCustomizado disabled readonly style={estilos.input} label='Cidade' value={cidadeVaga} onChangeTeonChangeText={setCidadeVaga} />
                 <CampoTextoCustomizado disabled readonly style={estilos.input} label='Estado' value={estadoVaga} onChangeTeonChangeText={setEstadoVaga} />
-                <BotaoCustomizado onPress={salvar} >exlcuir vaga</BotaoCustomizado>
+                <BotaoCustomizado style={estilos.botao} onPress={excluir} >Excluir Vaga</BotaoCustomizado>
             </View>
 
 

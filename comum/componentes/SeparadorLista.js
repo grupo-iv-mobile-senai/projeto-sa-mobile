@@ -5,8 +5,7 @@ const SeparadorLista = () => {
 
     const estilos = StyleSheet.create({
         tudo: {
-            height: 2,
-            backgroundColor: CORES.FUNDO_CLARO
+            height: 10,
         },
     })
 

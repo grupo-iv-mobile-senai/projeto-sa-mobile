@@ -26,6 +26,7 @@ const estilos = StyleSheet.create({
     borderWidth: 2,
     margin: 10,
     fontSize: 20,
+    borderRadius: 10
   },
   botao: {
     backgroundColor: CORES.FUNDO_ESCURO,

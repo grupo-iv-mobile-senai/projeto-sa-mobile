@@ -51,7 +51,7 @@ const TelaPrincipal = (props) => {
          <BotaoCustomizado
             style={estilos.botaoAnunciar}
             onPress={() => props.navigation.navigate(TELAS.TELA_ANUNCIO)}
-         >anunciar vaga</BotaoCustomizado>
+         >Anunciar Vaga</BotaoCustomizado>
          <FlatList
             data={vagas}
             renderItem={(props) => <ItemLista {...props} />}

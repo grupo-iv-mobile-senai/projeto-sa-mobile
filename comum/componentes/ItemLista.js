@@ -14,7 +14,7 @@ const estilos = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     alignItems: "center",
-    width: 340,
+    width: 380,
   },
   texto: {
     fontSize: 22,
@@ -46,7 +46,7 @@ const ItemLista = (props) => {
         return "help-circle";
     }
   };
-  console.log(props);
+
 
   const navigation = useNavigation();
 
