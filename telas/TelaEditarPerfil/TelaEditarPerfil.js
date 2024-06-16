@@ -89,7 +89,7 @@ const TelaEditarPerfil = (props) => {
   const excluir = async () => {
     try {
       if (confirm("tem certeza?")) {
-        await api.delete("/cliente/" + idCliente);
+        await api.delete("/cliente/"+ idCliente);
         props.navigation.navigate(TELAS.TELA_LOGIN, { refresh: +new Date() });
         limparStorage(CHAVES_SOTORAGE.USUARIO_LOGADO)
       }
